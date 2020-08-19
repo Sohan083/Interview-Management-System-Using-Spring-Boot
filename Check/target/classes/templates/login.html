@@ -1,0 +1,54 @@
+<!DOCTYPE HTML>
+<html xmlns:th="http://www.thymeleaf.org">
+   <head>
+      <style>
+         th, td {
+         padding: 5px;
+         }
+         td span  {
+         font-size:90%;
+         font-style: italic;
+         color: red;
+         }
+         .error {
+         color: red;
+         font-style: italic;
+         }
+      </style>
+   </head>
+   <body>
+       
+      <h2>Login</h2>
+       
+      <div th:if="${errorMessage != null}"
+           th:utext="${errorMessage}" class="error">...</div>
+       
+      <form th:action="@{/loginValidate}" th:object="${loginForm}" method="POST">
+         <table>
+            <tr>
+               <td>User Name</td>
+               <td><input type="text" th:field="*{name}" /></td>
+               <td>
+                  <span th:if="${#fields.hasErrors('name')}" th:errors="*{name}">..</span>
+               </td>
+            </tr>
+            <tr>
+               <td>Password</td>
+               <td><input type="password" th:field="*{pass}" /> </td>
+               <td>
+                  <span th:if="${#fields.hasErrors('pass')}" th:errors="*{pass}">..</span>
+               </td>
+            </tr>
+            <tr>
+               <td>&nbsp;</td>
+               <td>
+                  <input type="submit" value="Submit" />
+                  <a th:href="@{/}">Cancel</a>
+               </td>
+               <td>&nbsp;</td>
+            </tr>
+         </table>
+      </form>
+       
+   </body>
+</html>

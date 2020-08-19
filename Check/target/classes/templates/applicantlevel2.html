@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html 
+   xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="utf-8"/>
+<title>Home</title>
+</head>
+<body>
+ <h2>Applicant on second level</h2>
+ <a th:href="@{/applicantlevel3}">Next level</a>
+ 	<br>
+    <table>
+        <thead>
+         <tr>
+           <th>Id</th>
+           <th>Name</th>
+           <th>Varsity</th>
+           <th>CGPA</th>
+        </tr>
+        </thead>
+        <tbody>
+          <tr th:each="user : ${applicant}">
+          	<form th:action="@{/applicantPass}" th:object="${applicantLevel}" method="POST">
+	             <td th:text="${user.id}">Id</td>
+	             <td th:text="${user.name}">Name</td>
+	             <td th:text="${user.varsity}">Varsity</td>
+	             <td th:text="${user.cgpa}">CGPA</td>
+	             <td><input type="hidden" th:value="${user.id}" name="id"/><button type="submit" name="action">Mark as pass the level</button></td>
+	         </form>
+          </tr>
+        </tbody>
+    </table>
+ </body>
+</html>
